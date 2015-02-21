@@ -8,4 +8,4 @@ Googleのアプリ一覧UIサンプルです。
 [DEMO](http://webdesign-dackel.com/demo/google-app-ui/)
 
 ブログの記事はこちら。  
-> [Googleのアプリ一覧UIを作ってみる](http://webdesign-dackel.com/2015/02/21/google-app-list-ui/ ‎)
+> [Googleのアプリ一覧UIを作ってみる](http://webdesign-dackel.com/2015/02/21/google-app-list-ui/‎)
