@@ -1,0 +1,387 @@
+@charset "utf-8";
+@import "normalize";
+@import "icon";
+@import "font-awesome/font-awesome";
+@import url(http://fonts.googleapis.com/css?family=Josefin+Sans:400,600);
+$screen-lg:600px;
+$header-height:50px;
+$font-accent:"Josefin Sans","ヒラギノ角ゴ Pro W3","ヒラギノ角ゴ Pro","Hiragino Kaku Gothic Pro","Hiragino Kaku Gothic ProN",Arial,Helvetica,"メイリオ",Meiryo,cursive;
+$font-base:"ヒラギノ角ゴ Pro W3","ヒラギノ角ゴ Pro","Hiragino Kaku Gothic Pro","Hiragino Kaku Gothic ProN",Arial,Helvetica,"メイリオ",Meiryo,sans-serif;
+$color:#213345;
+$green:#02c897;
+$light-gray:#efefef;
+
+
+.clearfix {
+  zoom:1;
+  &:after {
+    content:"";
+    display:block;
+    clear:both;
+  }
+}
+
+body {
+  min-width:900px;
+  padding-bottom:5em;
+  color:$color;
+  font-size:16px;
+}
+
+a {
+  color:$green;
+  text-decoration:none;
+}
+
+hr {
+  height:0;
+  margin:4em 0;
+  border:0;
+  border-top:1px solid darken($light-gray, 10%);
+}
+
+h2 {
+  margin:2em 0 1em 0;
+  padding-bottom:.5em;
+  border-bottom:1px solid darken($light-gray, 10%);
+}
+
+.container {
+  @extend .clearfix;
+  margin:0 auto;
+  padding-right:50px;
+  padding-left:50px;
+}
+
+.header {
+  height:$header-height;
+  background:#fff;
+  h1 {
+    float:left;
+    margin:0;
+    font-family:$font-accent;
+    font-size:18px;
+    line-height:$header-height;
+    a {
+      display:block;
+      height:100%;
+      color:$color;
+      letter-spacing:.1em;
+      transition:all .1s ease-in-out;
+      &:hover {
+        letter-spacing:.15em;
+        .icon-dackel {
+          color:darken($green, 5%);
+        }
+      }
+    }
+    .icon-dackel {
+      position:relative;
+      top:6px;
+      margin-right:5px;
+      color:$green;
+      font-size:30px;
+      transition:all .1s ease-in-out;
+    }
+  }
+}
+
+.nav-right {
+  @extend .clearfix;
+  float:right;
+  margin:0;
+  list-style:none;
+}
+
+.nav-item {
+  position:relative;
+  float:left;
+  height:$header-height;
+  margin:0 0 0 25px;
+  font-size:12px;
+  > a {
+    display:block;
+    height:100%;
+    line-height:$header-height;
+    &:hover {
+      text-decoration:underline;
+    }
+  }
+}
+
+.nav-item-icon {
+  > a {
+    cursor:default;
+    > .fa {
+      position:relative;
+      top:2px;
+      color:darken($light-gray, 50%);
+      font-size:20px;
+      &:hover {
+        color:darken($light-gray, 70%);
+      }
+    }
+  }
+}
+
+.footer {
+  position:fixed;
+  z-index:10;
+  bottom:0;
+  left:0;
+  width:100%;
+  border-top:1px solid darken($light-gray, 5%);
+  background:$light-gray;
+}
+
+.copyright {
+  margin:1em 0;
+  font-family:$font-accent;
+  font-size:12px;
+  text-align:right;
+  letter-spacing:.1em;
+  letter-spacing:1.4;
+}
+
+
+// ====================================================================
+// アプリ一覧UI用スタイル
+// ====================================================================
+@keyframes app-list-opacity {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+#app-list {
+  position:absolute;
+  z-index:100;
+  top:50px;
+  left:50%;
+  display:none;
+  width:320px;
+  margin-left:-160px;
+  opacity:0;
+  border:1px solid darken($light-gray, 10%);
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.2);
+  &:before,
+  &:after {
+    content:"";
+    position:absolute;
+    left:50%;
+    display:block;
+    width:0;
+    height:0;
+  }
+  &:before {
+    z-index:1;
+    top:-8px;
+    margin-left:-9px;
+    border-width:0 9px 9px 9px;
+    border-style:solid;
+    border-color:transparent transparent #fff transparent;
+  }
+  &:after {
+    z-index:0;
+    top:-10px;
+    margin-left:-10px;
+    border-width:0 10px 10px 10px;
+    border-style:solid;
+    border-color:transparent transparent darken($light-gray, 10%) transparent;
+  }
+  ::-webkit-scrollbar {
+    z-index:10;
+    width:15px;
+    height:15px;
+    background:transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    width:5px;
+    min-width:20px;
+    height:5px;
+    min-height:20px;
+    border:5px solid transparent;
+    border-radius:10px;
+    background-color:rgba(0,0,0,.3);
+    background-clip:padding-box;
+  }
+  ::-webkit-scrollbar-button {
+    width:0;
+    height:0;
+  }
+  &.show {
+    display:block;
+    opacity:1;
+    animation:app-list-opacity .1s ease-out;
+  }
+  &.scroll {
+    > .app-list-more {
+      display:none;
+    }
+  }
+}
+
+#app-list-body {
+  overflow-x:hidden;
+  overflow-y:auto;
+  height:390px;
+  transition:height .3s ease-out;
+  #app-list.scroll & {
+    height:290px;
+  }
+}
+
+.app-list-more {
+  position:absolute;
+  z-index:10;
+  bottom:0;
+  left:0;
+  display:block;
+  width:100%;
+  height:40px;
+  color:darken($light-gray, 50%);
+  line-height:40px;
+  text-align:center;
+  background:lighten($light-gray, 1%);
+  &:hover {
+    background-color:$light-gray;
+  }
+}
+
+.app-list-more-transparent {
+  position:static;
+  clear:both;
+  background:transparent;
+  &:hover {
+    text-decoration:underline;
+    background:transparent;
+  }
+}
+
+.app-list-group {
+  position:relative;
+  overflow:hidden;
+  width:265px;
+  margin:0;
+  padding:28px;
+  list-style:none;
+  & + .app-list-group {
+    display:none;
+    &:before {
+      content:"";
+      position:relative;
+      top:-28px;
+      display:block;
+      height:0;
+      border-top:1px solid $light-gray;
+    }
+    #app-list.scroll & {
+      display:block;
+    }
+  }
+}
+
+.app-list-item {
+  float:left;
+  width:86px;
+  height:98px;
+  text-align:center;
+  > a {
+    position:relative;
+    display:block;
+    width:100%;
+    height:100%;
+    &:after {
+      content:"";
+      position:absolute;
+      z-index:1;
+      top:0;
+      left:0;
+      display:block;
+      width:100%;
+      height:100%;
+      border:1px solid #fff;
+      border-radius:3px;
+      transition:all .2s ease-out;
+    }
+    &:hover:after {
+      border-color:darken($light-gray, 10%);
+    }
+  }
+}
+
+.app-list-item-icon {
+  height:50px;
+  margin-bottom:10px;
+  padding-top:10px;
+  font-size:40px;
+}
+
+.app-list-item-name {
+  display:block;
+}
+// ====================================================================
+// アプリ一覧UI用スタイルはここまで
+// ====================================================================
+
+
+// 各アイコンのカラー設定
+.fa-code {
+  color:#2ebc3d;
+}
+
+.fa-paint-brush {
+  color:#6788bc;
+}
+
+.fa-phone {
+  color:#bc201c;
+}
+
+.fa-cog {
+  color:#bc1a8f;
+}
+
+.fa-envelope-o {
+  color:#9aabbc;
+}
+
+.fa-bell-o {
+  color:#bc8b07;
+}
+
+.fa-users {
+  color:#4010bc;
+}
+
+.fa-users {
+  color:#49b5bc;
+}
+
+.fa-heart {
+  color:#bc0066;
+}
+
+.fa-wifi {
+  color:#1c9fbc;
+}
+
+.fa-thumb-tack {
+  color:#71bc15;
+}
+
+.fa-rocket {
+  color:#70b7bc;
+}
+
+.fa-pie-chart {
+  color:#2830bc;
+}
+
+.fa-map-marker {
+  color:#bc412b;
+}
